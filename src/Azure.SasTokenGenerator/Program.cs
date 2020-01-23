@@ -2,11 +2,14 @@
 
 namespace Azure.SasTokenGenerator
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+
+            var appConfiguration = AppConfiguration.ReadFromJsonFile("appsettings.json");
+
         }
     }
 }
