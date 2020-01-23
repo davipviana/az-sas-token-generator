@@ -11,6 +11,7 @@ namespace Azure.SasTokenGenerator
         public string PolicyName { get; set; }
         public string PolicyKey { get; set; }
         public string QueueName { get; set; }
+        public int MinutesToExpire { get; set; }
         #endregion
 
         #region Constructors
@@ -31,6 +32,20 @@ namespace Azure.SasTokenGenerator
             Configuration.Bind(appConfiguration);
 
             return appConfiguration;
+        }
+    }
+
+    public static class AppConfigurationExtensions
+    {
+        public static bool IsConfigurationValid(this AppConfiguration appConfiguration)
+        {
+            return (appConfiguration != null
+                && !string.IsNullOrEmpty(appConfiguration.HostName)
+                && !string.IsNullOrEmpty(appConfiguration.PolicyName)
+                && !string.IsNullOrEmpty(appConfiguration.PolicyKey)
+                && !string.IsNullOrEmpty(appConfiguration.QueueName)
+                && appConfiguration.MinutesToExpire != 0
+            );
         }
     }
 }
